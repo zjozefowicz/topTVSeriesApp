@@ -1,5 +1,12 @@
-.App {
-  text-align: center;
+@import './constants/colors';
+
+* {
+  color: $grey-text;
+}
+
+h1 {
+  color: $dark-text;
+  font-weight: 500;
 }
 
 .App-logo {
@@ -20,14 +27,5 @@
 }
 
 .App-link {
-  color: #61dafb;
-}
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
 }

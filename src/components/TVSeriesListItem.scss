@@ -1,0 +1,102 @@
+@import '../constants/colors';
+
+.tvSeriesListItem {
+  display: flex;
+  position: relative;
+  padding: 20px;
+
+  + .tvSeriesListItem {
+    border-top: 1px solid $light-border;
+  }
+
+  .indexWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-right: 20px;
+    width: 30px;
+    height: 30px;
+    background: $accent-color;
+    border-radius: 50%;
+    color: $white;
+  }
+
+  .poster {
+    margin-right: 20px;
+    width: 100px;
+    height: auto;
+  }
+
+  .rateBarWrapper {
+    display: block;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    border-radius: 5px;
+    background: $dark-text;
+    overflow: hidden;
+    width: 100px;
+    height: 10px;
+
+    .rateBar {
+      height: 10px;
+      background: $accent-color;
+    }
+  }
+
+  .unstarred,
+  .starred {
+    margin-left: 3px;
+    cursor: pointer;
+  }
+
+  .unstarred {
+    opacity: .4;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+
+  .originalName {
+    margin-left: 3px;
+    color: $light-text;
+    font-style: italic;
+  }
+
+  .seriesNameWrapper {
+    margin-bottom: 10px;
+  }
+
+  .seriesName {
+    color: $dark-text;
+    font-size: 16px;
+    font-weight: 500;
+  }
+
+  .seriesDescription {
+    margin-bottom: 5px;
+    font-size: 13px;
+  }
+
+  .seriesPopularity {
+    margin-bottom: 5px;
+    font-size: 14px;
+
+    .label {
+      color: $light-text;
+      font-weight: 500;
+    }
+
+    .number {
+      margin-left: 3px;
+    }
+  }
+
+  .expandSeriesCell {
+    cursor: pointer;
+    color: $accent-hover;
+    font-size: 14px;
+  }
+}
