@@ -1,65 +1,82 @@
 import React from 'react'
+import PropTypes from 'prop-types'
+import { range } from 'lodash'
+import './FiltersBar.scss'
 import THEMOVIEDB_API from '../constants/themoviedb'
+import APP from '../constants/app'
 
-class FiltersBar extends React.Component {
-  constructor(props) {
-    super(props)
-
-    this.sortByMostPopular = this.sortByMostPopular.bind(this)
-    this.sortByLeastPopular = this.sortByLeastPopular.bind(this)
-    this.sortByHighestRanked = this.sortByHighestRanked.bind(this)
-    this.sortByLowestRanked = this.sortByLowestRanked.bind(this)
-    this.changeListVisiblePages = this.changeListVisiblePages.bind(this)
-  }
-
-  sortByMostPopular() {
-    const { changeListSorting } = this.props
-    changeListSorting(THEMOVIEDB_API.sortingOptions.popularity.desc)
-  }
-
-  sortByLeastPopular() {
-    const { changeListSorting } = this.props
-    changeListSorting(THEMOVIEDB_API.sortingOptions.popularity.asc)
-  }
-
-  sortByHighestRanked() {
-    const { changeListSorting } = this.props
-    changeListSorting(THEMOVIEDB_API.sortingOptions.ranking.desc)
-  }
-
-  sortByLowestRanked() {
-    const { changeListSorting } = this.props
-    changeListSorting(THEMOVIEDB_API.sortingOptions.ranking.asc)
-  }
-
-  changeListVisiblePages(amount) {
-    return () => this.props.changeListVisiblePages(amount)
-  }
-
-  render() {
-    return (
-      <div className="filtersBar">
-        <div className="optionsList">
-          <a className="filter" onClick={this.props.toggleStarredFilter}>Only starred</a>
-        </div>
-        <div className="filterLabel">Sorting:</div>
-        <div className="optionsList">
-          <a className="filter" onClick={this.sortByMostPopular}>Most popular</a>
-          <a className="filter" onClick={this.sortByLeastPopular}>Least popular</a>
-          <a className="filter" onClick={this.sortByHighestRanked}>Highest rated</a>
-          <a className="filter" onClick={this.sortByLowestRanked}>Lowest rated</a>
-        </div>
-        <div className="filterLabel">Pagination:</div>
-        <div className="optionsList">
-          <a className="filter" onClick={this.changeListVisiblePages(1)}>20</a>
-          <a className="filter" onClick={this.changeListVisiblePages(2)}>40</a>
-          <a className="filter" onClick={this.changeListVisiblePages(3)}>60</a>
-          <a className="filter" onClick={this.changeListVisiblePages(4)}>80</a>
-          <a className="filter" onClick={this.changeListVisiblePages(5)}>100</a>
+const FiltersBar = ({
+  changeListSorting,
+  changeListVisiblePages,
+  toggleStarredFilter,
+  preferences
+}) => {
+  const { popularity, ranking } = THEMOVIEDB_API.sortingOptions
+  return (
+    <div>
+      <div className="mainTabs">
+        <button
+          className={`${preferences.sorting === popularity ? 'active' : ''} tab`}
+          name={popularity}
+          onClick={changeListSorting}
+          type="button">
+          Most popular
+        </button>
+        <button
+          className={`${preferences.sorting === ranking ? 'active' : ''} tab`}
+          name={ranking}
+          onClick={changeListSorting}
+          type="button">
+          Highest rated
+        </button>
+      </div>
+      <div className="filtersBarWrapper">
+        <div className="filtersBar">
+          <div className="optionsList">
+            <button
+              className={`filter ${preferences.onlyStarred ? '' : 'active'}`}
+              onClick={preferences.onlyStarred ? toggleStarredFilter : undefined}
+              type="button">
+              Show all results
+            </button>
+            <button
+              className={`filter ${preferences.onlyStarred ? 'active' : ''}`}
+              onClick={!preferences.onlyStarred ? toggleStarredFilter : undefined}
+              type="button">
+              Show only starred
+            </button>
+          </div>
+          <div className="divider" />
+          <div className="optionsList">
+            <div className="filterLabel">Visible entries:</div>
+            {
+              range(1, APP.maxPages + 1).map(visiblePages => (
+                <button
+                  className={`filter ${visiblePages === preferences.visiblePages ? 'active' : ''}`}
+                  key={visiblePages}
+                  name={visiblePages}
+                  onClick={changeListVisiblePages}
+                  type="button">
+                  {visiblePages * THEMOVIEDB_API.pageSize}
+                </button>
+              ))
+            }
+          </div>
         </div>
       </div>
-    )
-  }
+    </div>
+  )
+}
+
+FiltersBar.propTypes = {
+  changeListSorting: PropTypes.func.isRequired,
+  changeListVisiblePages: PropTypes.func.isRequired,
+  toggleStarredFilter: PropTypes.func.isRequired,
+  preferences: PropTypes.shape({
+    visiblePages: PropTypes.number.isRequired,
+    onlyStarred: PropTypes.bool.isRequired,
+    sorting: PropTypes.string.isRequired
+  }).isRequired
 }
 
 export default FiltersBar

@@ -1,4 +1,4 @@
-@import '../constants/colors';
+@import '../constants/sass_variables';
 
 .tvSeriesListItem {
   display: flex;
@@ -11,44 +11,80 @@
 
   .indexWrapper {
     display: flex;
+    flex-shrink: 0;
     align-items: center;
     justify-content: center;
-    flex-shrink: 0;
     margin-right: 20px;
+    border-radius: 50%;
+    background: $accent-color;
     width: 30px;
     height: 30px;
-    background: $accent-color;
-    border-radius: 50%;
     color: $white;
   }
 
-  .poster {
+  .poster,
+  .posterPlaceholder {
     margin-right: 20px;
     width: 100px;
+  }
+
+  .poster {
     height: auto;
   }
 
+  .posterPlaceholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: $accent-color;
+    height: 150px;
+    color: $white;
+  }
+
   .rateBarWrapper {
-    display: block;
     position: absolute;
     top: 20px;
     right: 20px;
-    border-radius: 5px;
-    background: $dark-text;
-    overflow: hidden;
-    width: 100px;
-    height: 10px;
+
+    .label,
+    .percentage {
+      color: $accent-hover;
+      font-size: 11px;
+    }
+
+    .percentage {
+      margin-left: 2px;
+      font-weight: bold;
+    }
 
     .rateBar {
+      display: block;
+      border-radius: 5px;
+      background: $dark-text;
+      width: 100px;
       height: 10px;
+      overflow: hidden;
+    }
+
+    .filling {
       background: $accent-color;
+      height: 10px;
     }
   }
 
   .unstarred,
   .starred {
     margin-left: 3px;
+    outline: 0;
+    border: 0;
+    background: 0;
     cursor: pointer;
+    padding: 0;
+    font-size: 16px;
+
+    .star {
+      pointer-events: none;
+    }
   }
 
   .unstarred {
@@ -65,8 +101,21 @@
     font-style: italic;
   }
 
+  .seriesInfoWrapper {
+    width: 100%;
+  }
+
   .seriesNameWrapper {
     margin-bottom: 10px;
+    max-width: calc(100% - 120px);
+
+    .index {
+      display: none;
+      margin-right: 5px;
+      color: $dark-text;
+      font-size: 20px;
+      font-weight: bold;
+    }
   }
 
   .seriesName {
@@ -95,8 +144,36 @@
   }
 
   .expandSeriesCell {
+    outline: 0;
+    border: 0;
+    background: 0;
     cursor: pointer;
+    padding: 0;
     color: $accent-hover;
     font-size: 14px;
+  }
+}
+
+@media only screen and (max-width: 610px) {
+  .tvSeriesListItem {
+    .indexWrapper {
+      display: none;
+    }
+
+    .seriesNameWrapper {
+      .index {
+        display: inline;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .tvSeriesListItem {
+    flex-wrap: wrap;
+
+    .posterWrapper {
+      margin-bottom: 10px;
+    }
   }
 }

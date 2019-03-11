@@ -8,18 +8,12 @@ const THEMOVIEDB_API = {
   defaultLanguage: 'en',
   defaultTimezone: 'Poland%2FWarsaw',
   sortingOptions: {
-    popularity: {
-      asc: 'popularity.asc',
-      desc: 'popularity.desc'
-    },
-    ranking: {
-      asc: 'vote_average.asc',
-      desc: 'vote_average.desc'
-    }
+    popularity: 'popularity.desc',
+    ranking: 'vote_average.desc'
   },
   pageSize: 20
 }
 
-THEMOVIEDB_API.defaultSorting = THEMOVIEDB_API.sortingOptions.popularity.desc
+THEMOVIEDB_API.defaultSorting = THEMOVIEDB_API.sortingOptions.popularity
 
 export default THEMOVIEDB_API

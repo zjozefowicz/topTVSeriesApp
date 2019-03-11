@@ -1,0 +1,58 @@
+@import '../../constants/sass_variables';
+
+.expandedSeriesSeasons {
+  margin-top: 5px;
+  border: 1px solid $light-border;
+  border-radius: 3px;
+  overflow: hidden;
+
+  .tvSeriesSeasonHeader,
+  .seasonInfo {
+    display: flex;
+    position: relative;
+
+    .seasonName {
+      width: 60%;
+    }
+
+    .seasonEpisodesCount {
+      width: 20%;
+    }
+
+    .seasonAirDate {
+      width: 20%;
+    }
+
+    .seasonName,
+    .seasonEpisodesCount,
+    .seasonAirDate {
+      padding: 5px 5px 0;
+      color: $dark-text;
+      font-size: 13px;
+    }
+  }
+
+  .tvSeriesSeasonHeader {
+    .seasonName,
+    .seasonEpisodesCount,
+    .seasonAirDate {
+      padding-bottom: 5px;
+      font-weight: 500;
+    }
+  }
+
+  .tvSeriesSeasonWrapper {
+    border-top: 1px solid $dark-border;
+    padding: 5px 0 10px;
+
+    &:nth-child(2n) {
+      background-color: rgba($light-border, .5); // sass-lint:disable-line no-color-literals
+    }
+  }
+
+  .seasonOverview {
+    padding: 0 5px;
+    color: $grey-text;
+    font-size: 12px;
+  }
+}

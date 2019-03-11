@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import moment from 'moment'
 
 const TVSeriesSeason = ({ season }) => (
@@ -11,5 +12,14 @@ const TVSeriesSeason = ({ season }) => (
     <div className="seasonOverview">{season.overview}</div>
   </div>
 )
+
+TVSeriesSeason.propTypes = {
+  season: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    episode_count: PropTypes.number.isRequired,
+    air_date: PropTypes.string.isRequired,
+    overview: PropTypes.string
+  }).isRequired
+}
 
 export default TVSeriesSeason

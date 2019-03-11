@@ -1,8 +1,21 @@
-@import '../constants/colors';
+@import '../constants/sass_variables';
+
+.container {
+  margin: 10px;
+}
 
 .tvSeriesListWrapper {
-  margin: 20px;
+  margin: auto;
   border: 1px solid $light-border;
   border-radius: 4px;
   max-width: 1000px;
+}
+
+.noResultsPlaceholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 300px;
+  font-weight: 500;
 }

@@ -1,0 +1,122 @@
+@import '../constants/sass_variables';
+
+.mainTabs {
+  display: flex;
+  margin: auto;
+  padding: 0 10px;
+  max-width: $content-width;
+
+  .tab {
+    display: inline-block;
+    outline: 0;
+    border: 1px solid $accent-color;
+    border-bottom: 0;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    cursor: pointer;
+    padding: 10px;
+    min-width: 120px;
+    text-align: center;
+    font-size: 16px;
+
+    + .tab {
+      margin-left: 10px;
+    }
+
+    &.active,
+    &:hover {
+      background: $accent-color;
+      color: $white;
+    }
+
+    &.active {
+      font-weight: 500;
+    }
+  }
+}
+
+.filtersBarWrapper {
+  background: $accent-color;
+
+  .filtersBar {
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    margin: auto;
+    padding: 10px;
+    max-width: $content-width;
+    line-height: 30px;
+  }
+
+  .filterLabel,
+  .filter {
+    color: $white;
+    font-size: 16px;
+  }
+
+  .optionsList {
+    display: flex;
+    flex-shrink: 0;
+  }
+
+  .divider {
+    display: block;
+    opacity: .5;
+    margin: 5px 10px;
+    background: $white;
+    width: 1px;
+    height: 20px;
+  }
+
+  .filterLabel {
+    margin-right: 3px;
+  }
+
+  .filter {
+    position: relative;
+    outline: 0;
+    border: 0;
+    background: 0;
+    cursor: pointer;
+    padding: 0;
+    line-height: 30px;
+    font-weight: 500;
+
+    + .filter {
+      margin-left: 12px;
+
+      &::before {
+        display: inline-block;
+        position: absolute;
+        top: calc(50% - 2px);
+        left: -8px;
+        border-radius: 50%;
+        background: $white;
+        width: 4px;
+        height: 4px;
+        content: '';
+      }
+    }
+
+    &:hover {
+      &:not(.active) {
+        text-decoration: underline;
+      }
+    }
+
+    &.active {
+      cursor: default;
+      color: $dark-text;
+    }
+  }
+}
+
+@media only screen and (max-width: 610px) {
+  .filtersBar {
+    flex-direction: column;
+
+    .divider {
+      display: none;
+    }
+  }
+}

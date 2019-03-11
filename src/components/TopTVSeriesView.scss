@@ -1,0 +1,32 @@
+@import '../constants/sass_variables';
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+* {
+  color: $grey-text;
+  font-family: 'Roboto', sans-serif;
+  -webkit-font-smoothing: antialiased; // sass-lint:disable-line no-vendor-prefixes
+}
+
+h1 {
+  color: $dark-text;
+  font-weight: 500;
+}
+
+.busyOverlay {
+  display: flex;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  align-items: center;
+  justify-content: center;
+  opacity: .7;
+  z-index: 100;
+  background: $white;
+  font-size: 50px;
+}
