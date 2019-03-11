@@ -16,7 +16,7 @@ h1 {
   font-weight: 500;
 }
 
-.busyOverlay {
+.overlay {
   display: flex;
   position: fixed;
   top: 0;
@@ -28,5 +28,7 @@ h1 {
   opacity: .7;
   z-index: 100;
   background: $white;
+  text-align: center;
+  color: $dark-text;
   font-size: 50px;
 }

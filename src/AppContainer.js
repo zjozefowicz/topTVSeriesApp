@@ -79,6 +79,7 @@ AppContainer.propTypes = {
 }
 
 const mapState = state => ({
+  apiBroken: state.apiBroken,
   visiblyLoading: state.visiblyLoading,
   preferences: state.preferences,
   tvSeriesList: selectors.getTVSeriesList(state)

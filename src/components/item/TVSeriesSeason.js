@@ -7,7 +7,13 @@ const TVSeriesSeason = ({ season }) => (
     <div className="seasonInfo">
       <div className="seasonName">{season.name}</div>
       <div className="seasonEpisodesCount">{season.episode_count}</div>
-      <div className="seasonAirDate">{moment(season.air_date).format('ll')}</div>
+      <div className="seasonAirDate">
+        {
+          season.air_date
+            ? moment(season.air_date).format('ll')
+            : '-'
+        }
+      </div>
     </div>
     <div className="seasonOverview">{season.overview}</div>
   </div>
@@ -17,7 +23,7 @@ TVSeriesSeason.propTypes = {
   season: PropTypes.shape({
     name: PropTypes.string.isRequired,
     episode_count: PropTypes.number.isRequired,
-    air_date: PropTypes.string.isRequired,
+    air_date: PropTypes.string,
     overview: PropTypes.string
   }).isRequired
 }

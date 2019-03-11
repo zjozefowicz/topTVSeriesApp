@@ -6,6 +6,8 @@ export const setPagesUnloaded = () => ({ type: actionTypes.SET_PAGES_UNLOADED })
 
 export const setViewLoading = () => ({ type: actionTypes.SET_VIEW_LOADING })
 
+export const setAPIBroken = () => ({ type: actionTypes.SET_API_BROKEN })
+
 export const setViewLoaded = page => ({
   type: actionTypes.SET_VIEW_LOADED,
   page
@@ -48,7 +50,10 @@ export const fetchSeriesList = (page = 1) => (dispatch, getState) => {
         dispatch(setViewLoaded(page))
       }
     }
-  )
+  ).catch(error => {
+    console.error(error)
+    dispatch(setAPIBroken())
+  })
 }
 
 export const refreshSeriesList = () => (dispatch, getState) => {
@@ -72,7 +77,8 @@ export const changeListPreferences = data => (dispatch, getState) => {
     }
     if (data.sorting || data.visiblePages > getState().pagesLoaded) {
       dispatch(setViewLoading())
-      dispatch(fetchSeriesList())
+      const page = data.visiblePages ? getState().pagesLoaded + 1 : 1
+      dispatch(fetchSeriesList(page))
     }
   }
 }
@@ -105,7 +111,10 @@ export const fetchSeries = seriesId => (dispatch, getState) => {
       dispatch(updateSeriesDetails(data.data))
       dispatch(setSeriesLoaded(seriesId))
     }
-  )
+  ).catch(error => {
+    console.error(error)
+    dispatch(setAPIBroken())
+  })
 }
 
 export const toggleExpandSeries = seriesId => (dispatch, getState) => {

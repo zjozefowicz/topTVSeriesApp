@@ -5,6 +5,7 @@ import THEMOVIEDB_API from '../constants/themoviedb'
 import * as actionTypes from './actionTypes'
 
 const initialState = {
+  apiBroken: false,
   pagesLoaded: 0,
   visiblyLoading: true,
   seriesData: {},
@@ -59,6 +60,8 @@ const reducers = (state = initialState, action) => {
     return { ...state, visiblyLoading: true }
   case actionTypes.SET_VIEW_LOADED:
     return { ...state, pagesLoaded: action.page, visiblyLoading: false }
+  case actionTypes.SET_API_BROKEN:
+    return { ...state, apiBroken: true }
   default:
     return state
   }
